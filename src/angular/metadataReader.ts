@@ -176,14 +176,15 @@ export class MetadataReader {
         // If there's no valid inline styles, we resolve external styles
         Maybe.lift(external.styleUrls)
           .fmap((urls) =>
-            urls.map((
-              url // Resolve each style URL and transform to metadata
-            ) =>
-              this._resolve(url).fmap<StyleMetadata>((style) => ({
-                node: undefined,
-                style: normalizeTransformed(Config.transformStyle(style!, url)),
-                url,
-              }))
+            urls.map(
+              (
+                url // Resolve each style URL and transform to metadata
+              ) =>
+                this._resolve(url).fmap<StyleMetadata>((style) => ({
+                  node: undefined,
+                  style: normalizeTransformed(Config.transformStyle(style!, url)),
+                  url,
+                }))
             )
           )
           // merge Maybe<StyleMetadata>[] to Maybe<StyleMetadata[]>
