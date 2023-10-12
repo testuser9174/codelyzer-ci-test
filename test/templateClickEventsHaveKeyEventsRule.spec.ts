@@ -210,25 +210,25 @@ describe(ruleName, () => {
       assertSuccess(ruleName, source);
     });
 
-    // it('should work when element is interactive', () => {
-    //   const source = `
-    //     @Component({
-    //       template: \`
-    //         <input (click)="onClick()">
-    //         <button (click)="onClick()"></button>
-    //         <textarea (click)="onClick()"></textarea>
-    //         <select (click)="onClick()">
-    //           <option (click)="onClick()"></option>
-    //         </select>
-    //         <textarea (click)="onClick()"></textarea>
-    //         <a href="#" (click)="onClick()"></a>
-    //         <a [attr.href]="href" class="anchor" (click)="onClick()"></a>
-    //         <a [routerLink]="'route'" (click)="onClick()"></a>
-    //       \`
-    //     })
-    //     class Bar {}
-    //   `;
-    //   assertSuccess(ruleName, source);
-    // });
+    it('should work when element is interactive', () => {
+      const source = `
+        @Component({
+          template: \`
+            <input (click)="onClick()">
+            <button (click)="onClick()"></button>
+            <textarea (click)="onClick()"></textarea>
+            <select (click)="onClick()">
+              <option (click)="onClick()"></option>
+            </select>
+            <textarea (click)="onClick()"></textarea>
+            <a href="#" (click)="onClick()"></a>
+            <a [attr.href]="href" class="anchor" (click)="onClick()"></a>
+            <a [routerLink]="'route'" (click)="onClick()"></a>
+          \`
+        })
+        class Bar {}
+      `;
+      assertSuccess(ruleName, source);
+    });
   });
 });
