@@ -1,0 +1,32 @@
+{
+  "name": "codelyzer-gh-pages",
+  "version": "1.0.0",
+  "description": "Demo page for codelyzer",
+  "scripts": {
+    "build": "npm run clean && tsc -p tsconfig.json && npm run bundle:worker && npm run bundle:app",
+    "bundle:worker": "browserify dist/worker.js > dist/worker.bundle.js",
+    "minify:worker": "uglifyjs dist/worker.bundle.js --screw-ie8 --compress --output dist/worker.bundle.js",
+    "bundle:app": "browserify dist/app.js > dist/app.bundle.js",
+    "minify:app": "uglifyjs dist/app.bundle.js --screw-ie8 --compress --mangle --output dist/app.bundle.js",
+    "build:prod": "npm run build && npm run minify:worker && npm run minify:app",
+    "clean": "rimraf dist"
+  },
+  "author": "Minko Gechev <mgechev@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@angular/compiler": "8.2.11",
+    "@angular/core": "8.2.11",
+    "codelyzer": "5.2.2",
+    "codemirror": "5.59.2",
+    "rxjs": "6.5.3",
+    "tslint": "5.20.0",
+    "typescript": "3.9.7",
+    "uglifyjs": "2.4.11",
+    "zone.js": "0.10.2"
+  },
+  "devDependencies": {
+    "browserify": "16.5.0",
+    "rimraf": "3.0.0",
+    "uglify": "0.1.5"
+  }
+}

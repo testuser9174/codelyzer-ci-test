@@ -1,0 +1,14 @@
+{
+  "links": [
+    {
+      "title": "Configuration",
+      "url": "/configuration/"
+    },
+    {
+      "title": "Rule Flags",
+      "url": "/rule-flags/"
+    }
+  ],
+  "title": "Usage",
+  "url": "/usage"
+}

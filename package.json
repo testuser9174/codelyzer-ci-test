@@ -1,0 +1,113 @@
+{
+  "name": "codelyzer",
+  "version": "6.0.2",
+  "description": "Linting for Angular applications, following angular.io/styleguide.",
+  "main": "index.js",
+  "scripts": {
+    "docs": "ts-node build/buildDocs.ts",
+    "format:base": "prettier --config ./.prettierrc \"*.{json,md}\" \"src/**/*.{css,scss,ts}\" \"test/**/*.{css,scss,ts}\"",
+    "format:check": "npm run format:base -- --list-different",
+    "format:fix": "npm run format:base -- --write",
+    "generate-changelog": "standard-version -t ''",
+    "lint": "tslint -p . -c tslint.json \"src/**/*.ts\" \"test/**/*.ts\"",
+    "lint:fix": "npm run lint -- --fix",
+    "release": "npm run build && rimraf dist && tsc -p tsconfig-release.json && npm run copy:common && npm run prepare:package && cross-env BUILD_TYPE=prod npm run set:vars",
+    "build": "rimraf dist && tsc && npm run format:check && npm run lint && npm t",
+    "copy:common": "ncp README.md dist/README.md",
+    "prepare:package": "cat package.json | ts-node build/package.ts > dist/package.json",
+    "test": "rimraf dist && tsc && ncp test/fixtures dist/test/fixtures && mocha dist/test --recursive",
+    "test:watch": "rimraf dist && tsc && ncp test/fixtures dist/test/fixtures && cross-env BUILD_TYPE=dev npm run set:vars && mocha dist/test --watch --recursive",
+    "set:vars": "ts-node build/vars.ts --src ./dist",
+    "tscv": "tsc --version",
+    "tsc": "tsc",
+    "tsc:watch": "tsc --w"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run lint:fix",
+      "git add"
+    ],
+    "*.{css,json,md,scss,ts}": [
+      "npm run format:fix",
+      "git add"
+    ]
+  },
+  "contributors": [
+    "Minko Gechev <mgechev@gmail.com>",
+    "Preslav Semov <preslavsemov@gmail.com>",
+    "William Koza <william.koza@gmail.com>",
+    "Eugenio Romano <eugenioromanodeveloper@gmail.com>",
+    "Rafael Santana <rafaelsantana3095@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mgechev/codelyzer.git"
+  },
+  "keywords": [
+    "Angular",
+    "style guide",
+    "styleguide",
+    "nglint",
+    "codelyzer",
+    "lint",
+    "tslint"
+  ],
+  "author": "Minko Gechev <mgechev@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mgechev/codelyzer/issues"
+  },
+  "homepage": "https://github.com/mgechev/codelyzer#readme",
+  "devDependencies": {
+    "@commitlint/cli": "8.2.0",
+    "@commitlint/config-angular": "8.2.0",
+    "@types/chai": "4.2.13",
+    "@types/mocha": "5.2.7",
+    "@types/node": "11.15.50",
+    "@types/node-sass": "4.11.2",
+    "@types/sprintf-js": "1.1.2",
+    "cat": "0.2.0",
+    "chai": "4.2.0",
+    "chai-spies": "0.7.1",
+    "cross-env": "6.0.3",
+    "husky": "3.0.9",
+    "js-yaml": "3.13.1",
+    "json-stringify-pretty-compact": "2.0.0",
+    "lint-staged": "9.4.2",
+    "mocha": "6.2.1",
+    "ncp": "2.0.0",
+    "node-sass": "4.14.1",
+    "prettier": "2.3.2",
+    "rimraf": "3.0.0",
+    "rxjs": "6.5.3",
+    "standard-version": "8.0.1",
+    "ts-node": "8.5.4",
+    "tslint": "5.20.0",
+    "typescript": "3.9.7"
+  },
+  "peerDependencies": {
+    "@angular/compiler": ">=2.3.1 <13.0.0 || ^12.0.0-next || ^12.1.0-next || ^12.2.0-next",
+    "@angular/core": ">=2.3.1 <13.0.0 || ^12.0.0-next || ^12.1.0-next || ^12.2.0-next",
+    "tslint": "^5.0.0 || ^6.0.0"
+  },
+  "dependencies": {
+    "@angular/core": "9.0.0",
+    "@angular/compiler": "9.0.0",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.10.3",
+    "rxjs": "^6.5.3",
+    "app-root-path": "^3.0.0",
+    "aria-query": "^4.0.0",
+    "axobject-query": "2.0.2",
+    "css-selector-tokenizer": "^0.7.1",
+    "cssauron": "^1.4.0",
+    "damerau-levenshtein": "^1.0.4",
+    "semver-dsl": "^1.0.1",
+    "source-map": "^0.5.7",
+    "sprintf-js": "^1.1.2"
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  }
+}

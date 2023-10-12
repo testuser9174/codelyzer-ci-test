@@ -1,0 +1,17 @@
+---
+description: Ensures that classes use contextual decorators in its body.
+options: null
+optionsDescription: Not configurable.
+rationale: |-
+
+  Some decorators should only be used in certain class types. For example,
+  the decorator @Input() should
+  not be used in a class decorated with @Injectable().
+      
+ruleName: contextual-decorator
+type: functionality
+typescriptOnly: true
+layout: rule
+title: 'Rule: contextual-decorator'
+optionsJSON: 'null'
+---
